@@ -62,6 +62,7 @@ export function useSSE(stepId: StepId) {
         let buffer = "";
         let fullContent = "";
         let streamDone = false;
+        let currentEvent = "";
 
         while (!streamDone) {
           const { done, value } = await reader.read();
@@ -71,7 +72,6 @@ export function useSSE(stepId: StepId) {
           const lines = buffer.split("\n");
           buffer = lines.pop() || "";
 
-          let currentEvent = "";
           for (const line of lines) {
             if (line.startsWith("event: ")) {
               currentEvent = line.slice(7).trim();
@@ -92,6 +92,9 @@ export function useSSE(stepId: StepId) {
                   appendStreamingContent(parsed.content);
                 } else if (currentEvent === "result") {
                   applyResult(stepId, parsed);
+                } else if (currentEvent === "error" && parsed.error) {
+                  fullContent += `\n\n**Error:** ${parsed.error}`;
+                  appendStreamingContent(`\n\n**Error:** ${parsed.error}`);
                 }
               } catch {
                 // non-JSON data line

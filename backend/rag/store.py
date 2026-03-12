@@ -6,10 +6,13 @@ from config import settings
 COLLECTION_NAME = "robo_docs"
 
 _client = chromadb.PersistentClient(path=settings.chroma_persist_dir)
-_embeddings = OpenAIEmbeddings(
+_embed_kwargs = dict(
     model=settings.embedding_model,
     openai_api_key=settings.openai_api_key,
 )
+if settings.openai_base_url:
+    _embed_kwargs["openai_api_base"] = settings.openai_base_url
+_embeddings = OpenAIEmbeddings(**_embed_kwargs)
 
 
 def retrieve(query: str, k: int = 5) -> list[dict]:

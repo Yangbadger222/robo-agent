@@ -51,27 +51,29 @@ export default function ProjectPage() {
     router.push("/steps/structure");
   };
 
+  const inputClass = "w-full bg-black/20 border border-border/40 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-neon-cyan/50 focus:border-neon-cyan/30 transition placeholder:text-muted-foreground/40";
+
   return (
     <StepLayout stepId="project" title="Project Definition">
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium mb-1.5">Robot Name</label>
+          <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Robot Name</label>
           <input
             type="text"
             required
             value={form.robot_name}
             onChange={(e) => update("robot_name", e.target.value)}
-            className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            className={inputClass}
             placeholder="e.g., MyRobot Arm V1"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1.5">Robot Type</label>
+          <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Robot Type</label>
           <select
             value={form.robot_type}
             onChange={(e) => update("robot_type", e.target.value)}
-            className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            className={inputClass}
           >
             {ROBOT_TYPES.map((t) => (
               <option key={t} value={t}>
@@ -83,68 +85,68 @@ export default function ProjectPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5">Degrees of Freedom</label>
+            <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Degrees of Freedom</label>
             <input
               type="number"
               min={1}
               max={30}
               value={form.dof}
               onChange={(e) => update("dof", parseInt(e.target.value) || 1)}
-              className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className={inputClass}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Payload (kg)</label>
+            <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Payload (kg)</label>
             <input
               type="number"
               min={0}
               step={0.1}
               value={form.payload_kg}
               onChange={(e) => update("payload_kg", parseFloat(e.target.value) || 0)}
-              className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className={inputClass}
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5">Reach (m)</label>
+            <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Reach (m)</label>
             <input
               type="number"
               min={0}
               step={0.01}
               value={form.reach_m}
               onChange={(e) => update("reach_m", parseFloat(e.target.value) || 0)}
-              className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className={inputClass}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Budget (USD)</label>
+            <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Budget (USD)</label>
             <input
               type="number"
               min={0}
               step={100}
               value={form.budget_usd}
               onChange={(e) => update("budget_usd", parseFloat(e.target.value) || 0)}
-              className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className={inputClass}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1.5">Description</label>
+          <label className="block text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Description</label>
           <textarea
             rows={4}
             value={form.description}
             onChange={(e) => update("description", e.target.value)}
-            className="w-full bg-input rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+            className={`${inputClass} resize-none`}
             placeholder="Describe the robot's purpose, environment, and any special requirements..."
           />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-primary text-primary-foreground rounded-lg py-2.5 text-sm font-medium hover:brightness-110 transition"
+          className="w-full bg-primary text-primary-foreground rounded-lg py-2.5 text-sm font-medium hover-glow transition"
         >
           Save & Continue
         </button>

@@ -14,7 +14,7 @@ export function FileTree({ files, selectedFile, onSelect }: FileTreeProps) {
 
   if (filenames.length === 0) {
     return (
-      <div className="p-4 text-sm text-muted-foreground">No files generated yet.</div>
+      <div className="p-4 text-sm text-muted-foreground font-mono">No files generated yet.</div>
     );
   }
 
@@ -31,7 +31,7 @@ export function FileTree({ files, selectedFile, onSelect }: FileTreeProps) {
       {Object.entries(grouped).map(([dir, dirFiles]) => (
         <div key={dir}>
           {dir && (
-            <div className="flex items-center gap-2 px-3 py-1 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 px-3 py-1 text-[10px] font-mono tracking-wider uppercase text-neon-cyan/50">
               <Folder className="w-3 h-3" />
               {dir}
             </div>
@@ -41,12 +41,17 @@ export function FileTree({ files, selectedFile, onSelect }: FileTreeProps) {
               key={f}
               onClick={() => onSelect(f)}
               className={cn(
-                "w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-accent transition",
-                f === selectedFile && "bg-accent text-accent-foreground"
+                "w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left transition font-mono",
+                f === selectedFile
+                  ? "bg-neon-cyan/10 text-neon-cyan border-l-2 border-neon-cyan/60"
+                  : "hover:bg-accent/40 border-l-2 border-transparent"
               )}
             >
-              <File className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="truncate">{f.split("/").pop()}</span>
+              <File className={cn(
+                "w-3.5 h-3.5 flex-shrink-0",
+                f === selectedFile ? "text-neon-cyan/70" : "text-muted-foreground/50"
+              )} />
+              <span className="truncate text-xs">{f.split("/").pop()}</span>
             </button>
           ))}
         </div>

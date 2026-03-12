@@ -34,7 +34,7 @@ export default function MotorPage() {
         <button
           onClick={handleFind}
           disabled={!structureSpec || isStreaming}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 disabled:opacity-50 transition"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover-glow disabled:opacity-50 transition"
         >
           <Search className="w-4 h-4" />
           Find Motors with AI
@@ -42,25 +42,25 @@ export default function MotorPage() {
 
         {motorSelections.length > 0 && (
           <>
-            <div className="rounded-lg border border-border overflow-hidden">
+            <div className="rounded-lg glass-card overflow-hidden corner-brackets">
               <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-3 py-2 text-left font-medium">Joint</th>
-                    <th className="px-3 py-2 text-left font-medium">Motor</th>
-                    <th className="px-3 py-2 text-left font-medium">Type</th>
-                    <th className="px-3 py-2 text-right font-medium">Torque (Nm)</th>
-                    <th className="px-3 py-2 text-right font-medium">Price ($)</th>
+                <thead>
+                  <tr className="border-b border-neon-cyan/20">
+                    <th className="px-3 py-2.5 text-left font-mono text-[10px] tracking-wider uppercase text-neon-cyan/60">Joint</th>
+                    <th className="px-3 py-2.5 text-left font-mono text-[10px] tracking-wider uppercase text-neon-cyan/60">Motor</th>
+                    <th className="px-3 py-2.5 text-left font-mono text-[10px] tracking-wider uppercase text-neon-cyan/60">Type</th>
+                    <th className="px-3 py-2.5 text-right font-mono text-[10px] tracking-wider uppercase text-neon-cyan/60">Torque (Nm)</th>
+                    <th className="px-3 py-2.5 text-right font-mono text-[10px] tracking-wider uppercase text-neon-cyan/60">Price ($)</th>
                   </tr>
                 </thead>
                 <tbody>
                   {motorSelections.map((m, i) => (
-                    <tr key={i} className="border-t border-border">
-                      <td className="px-3 py-2 font-mono text-xs">{m.joint_name}</td>
+                    <tr key={i} className="border-t border-border/30 hover:bg-neon-cyan/5 transition">
+                      <td className="px-3 py-2 font-mono text-xs text-neon-cyan/80">{m.joint_name}</td>
                       <td className="px-3 py-2">{m.recommended_motor}</td>
                       <td className="px-3 py-2 text-muted-foreground">{m.motor_type}</td>
-                      <td className="px-3 py-2 text-right">{m.torque_nm}</td>
-                      <td className="px-3 py-2 text-right">${m.estimated_price}</td>
+                      <td className="px-3 py-2 text-right font-mono">{m.torque_nm ?? "—"}</td>
+                      <td className="px-3 py-2 text-right font-mono">${m.estimated_price ?? "N/A"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -69,7 +69,7 @@ export default function MotorPage() {
 
             <button
               onClick={handleComplete}
-              className="w-full bg-green-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-green-700 transition"
+              className="w-full bg-neon-green/90 text-black rounded-lg py-2.5 text-sm font-medium hover:bg-neon-green hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] transition"
             >
               Confirm Motors & Continue
             </button>

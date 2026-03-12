@@ -29,7 +29,7 @@ export function StepNavButtons({ stepId, onRerun }: StepNavButtonsProps) {
         {prevStep && (
           <button
             onClick={() => navigate(prevStep)}
-            className="flex items-center gap-1 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-foreground/20 transition"
+            className="flex items-center gap-1 px-4 py-2 rounded-lg border border-border/40 text-sm text-muted-foreground hover:text-foreground hover:border-neon-cyan/30 hover:glow-border-sm transition"
           >
             <ChevronLeft className="w-4 h-4" />
             Back
@@ -40,7 +40,7 @@ export function StepNavButtons({ stepId, onRerun }: StepNavButtonsProps) {
         {status === "stale" && onRerun && (
           <button
             onClick={onRerun}
-            className="flex items-center gap-1 px-4 py-2 rounded-lg border border-amber-500/50 text-amber-400 text-sm hover:bg-amber-500/10 transition"
+            className="flex items-center gap-1 px-4 py-2 rounded-lg border border-amber-500/40 text-amber-400 text-sm hover:bg-amber-500/10 hover:shadow-[0_0_12px_rgba(245,158,11,0.15)] transition"
           >
             <RefreshCw className="w-4 h-4" />
             Re-run
@@ -49,7 +49,7 @@ export function StepNavButtons({ stepId, onRerun }: StepNavButtonsProps) {
         {canGoNext && (
           <button
             onClick={() => navigate(nextStep!)}
-            className="flex items-center gap-1 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition"
+            className="flex items-center gap-1 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover-glow transition"
           >
             Next
             <ChevronRight className="w-4 h-4" />

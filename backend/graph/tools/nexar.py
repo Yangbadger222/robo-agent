@@ -64,30 +64,24 @@ async def _get_token() -> str:
 async def _graphql_request(query: str, variables: dict, retries: int = 3) -> dict:
     token = await _get_token()
     headers = {"Authorization": f"Bearer {token}"}
-    last_resp = None
 
     for attempt in range(retries):
         async with httpx.AsyncClient() as client:
-            last_resp = await client.post(
+            resp = await client.post(
                 GRAPHQL_URL,
                 json={"query": query, "variables": variables},
                 headers=headers,
                 timeout=30.0,
             )
 
-        if last_resp.status_code == 429 and attempt < retries - 1:
-            wait = 2 ** (attempt + 1)
-            await asyncio.sleep(wait)
+        if resp.status_code == 429 and attempt < retries - 1:
+            await asyncio.sleep(2 ** (attempt + 1))
             continue
 
-        last_resp.raise_for_status()
-        return last_resp.json()
+        resp.raise_for_status()
+        return resp.json()
 
-    if last_resp is not None:
-        last_resp.raise_for_status()
-    raise httpx.HTTPStatusError(
-        "All retries exhausted", request=None, response=last_resp  # type: ignore[arg-type]
-    )
+    raise RuntimeError("All Nexar API retries exhausted")
 
 
 def _parse_results(data: dict) -> list[dict]:

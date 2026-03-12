@@ -13,6 +13,7 @@ interface CodeViewerProps {
   onChange?: (value: string) => void;
   readOnly?: boolean;
   height?: string;
+  noBorder?: boolean;
 }
 
 export function CodeViewer({
@@ -21,6 +22,7 @@ export function CodeViewer({
   onChange,
   readOnly = true,
   height = "400px",
+  noBorder = false,
 }: CodeViewerProps) {
   const extensions = useMemo(() => {
     switch (language) {
@@ -36,7 +38,7 @@ export function CodeViewer({
   }, [language]);
 
   return (
-    <div className="rounded-lg overflow-hidden border border-border">
+    <div className={noBorder ? "h-full overflow-hidden" : "rounded-lg overflow-hidden border border-border"}>
       <CodeMirror
         value={code}
         height={height}

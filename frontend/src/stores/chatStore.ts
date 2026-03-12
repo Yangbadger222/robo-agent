@@ -44,5 +44,5 @@ export const useChatStore = create<ChatState>((set, get) => ({
   appendStreamingContent: (chunk) =>
     set((state) => ({ streamingContent: state.streamingContent + chunk })),
   setIsStreaming: (streaming) => set({ isStreaming: streaming }),
-  clearStreaming: () => set({ streamingContent: "", isStreaming: false }),
+  clearStreaming: () => set({ streamingContent: "" }),
 }));

@@ -48,14 +48,14 @@ export default function SoftwarePage() {
             { key: "isaac_lab", label: "Isaac Lab RL Environment" },
             { key: "launch_files", label: "Launch Files" },
           ].map(({ key, label }) => (
-            <label key={key} className="flex items-center gap-2 text-sm">
+            <label key={key} className="flex items-center gap-2 text-sm font-mono cursor-pointer group">
               <input
                 type="checkbox"
                 checked={options[key as keyof typeof options]}
                 onChange={(e) => setOptions((o) => ({ ...o, [key]: e.target.checked }))}
-                className="rounded"
+                className="rounded accent-neon-cyan"
               />
-              {label}
+              <span className="group-hover:text-neon-cyan/80 transition">{label}</span>
             </label>
           ))}
         </div>
@@ -63,36 +63,51 @@ export default function SoftwarePage() {
         <button
           onClick={handleGenerate}
           disabled={isStreaming}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 disabled:opacity-50 transition"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover-glow disabled:opacity-50 transition"
         >
           <Code className="w-4 h-4" />
           Generate Software with AI
         </button>
 
         {fileCount > 0 && (
-          <div className="flex rounded-lg border border-border overflow-hidden" style={{ height: "400px" }}>
-            <div className="w-48 border-r border-border overflow-y-auto bg-card">
+          <div className="flex rounded-lg glass-card overflow-hidden corner-brackets" style={{ height: "400px" }}>
+            <div className="w-48 flex-shrink-0 border-r border-border/30 overflow-y-auto bg-black/20">
               <FileTree
                 files={generatedCode}
                 selectedFile={selectedFile}
                 onSelect={setSelectedFile}
               />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0 overflow-hidden">
               {selectedFile && generatedCode[selectedFile] ? (
-                <CodeViewer
-                  code={generatedCode[selectedFile]}
-                  language={
-                    selectedFile.endsWith(".py") ? "python" :
-                    selectedFile.endsWith(".json") ? "json" :
-                    selectedFile.endsWith(".yaml") || selectedFile.endsWith(".yml") ? "yaml" :
-                    "xml"
-                  }
-                  height="400px"
-                />
+                <div className="h-full flex flex-col">
+                  <div className="flex items-center justify-between px-3 py-1.5 bg-black/30 border-b border-border/30 text-xs">
+                    <span className="font-mono truncate text-neon-cyan/70">{selectedFile}</span>
+                    <button
+                      onClick={() => setSelectedFile(null)}
+                      className="ml-2 text-muted-foreground hover:text-neon-cyan transition flex-shrink-0"
+                      aria-label="Close file"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="flex-1 min-h-0">
+                    <CodeViewer
+                      code={generatedCode[selectedFile]}
+                      language={
+                        selectedFile.endsWith(".py") ? "python" :
+                        selectedFile.endsWith(".json") ? "json" :
+                        selectedFile.endsWith(".yaml") || selectedFile.endsWith(".yml") ? "yaml" :
+                        "xml"
+                      }
+                      height="100%"
+                      noBorder
+                    />
+                  </div>
+                </div>
               ) : (
-                <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
-                  Select a file to view
+                <div className="flex items-center justify-center h-full text-sm text-muted-foreground font-mono">
+                  <span className="text-neon-cyan/30">&gt;</span>&nbsp;Select a file to view
                 </div>
               )}
             </div>
@@ -102,7 +117,7 @@ export default function SoftwarePage() {
         {fileCount > 0 && (
           <button
             onClick={handleComplete}
-            className="w-full bg-green-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-green-700 transition"
+            className="w-full bg-neon-green/90 text-black rounded-lg py-2.5 text-sm font-medium hover:bg-neon-green hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] transition"
           >
             Confirm Software & Continue
           </button>

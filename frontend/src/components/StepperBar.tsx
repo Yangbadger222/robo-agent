@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import { Check, Circle, AlertTriangle, Lock } from "lucide-react";
 
 const statusConfig: Record<StepStatus, { icon: React.ElementType; color: string; bg: string }> = {
-  completed: { icon: Check, color: "text-green-400", bg: "bg-green-500/20 border-green-500/50" },
-  current: { icon: Circle, color: "text-blue-400", bg: "bg-blue-500/20 border-blue-500/50" },
-  stale: { icon: AlertTriangle, color: "text-amber-400", bg: "bg-amber-500/20 border-amber-500/50" },
-  locked: { icon: Lock, color: "text-zinc-500", bg: "bg-zinc-800 border-zinc-700" },
+  completed: { icon: Check, color: "text-neon-green", bg: "bg-neon-green/10 border-neon-green/40" },
+  current: { icon: Circle, color: "text-neon-cyan", bg: "bg-neon-cyan/10 border-neon-cyan/40" },
+  stale: { icon: AlertTriangle, color: "text-amber-400", bg: "bg-amber-500/10 border-amber-500/40" },
+  locked: { icon: Lock, color: "text-muted-foreground/60", bg: "bg-muted/30 border-border/40" },
 };
 
 export function StepperBar() {
@@ -23,7 +23,8 @@ export function StepperBar() {
   };
 
   return (
-    <nav className="flex items-center gap-2 px-6 py-4 bg-card border-b border-border overflow-x-auto">
+    <nav className="flex items-center gap-2 px-6 py-4 bg-card/80 backdrop-blur-md border-b border-border/60 overflow-x-auto relative">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent" />
       {STEP_ORDER.map((step, idx) => {
         const status = stepStatuses[step];
         const config = statusConfig[status];
@@ -37,8 +38,8 @@ export function StepperBar() {
                 className={cn(
                   "w-8 h-px mx-1",
                   stepStatuses[STEP_ORDER[idx - 1]] === "completed"
-                    ? "bg-green-500/50"
-                    : "bg-zinc-700"
+                    ? "neon-line-completed"
+                    : "bg-border/40"
                 )}
               />
             )}
@@ -48,12 +49,15 @@ export function StepperBar() {
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all",
                 config.bg,
-                isActive && "ring-2 ring-blue-500/50",
-                canNavigateTo(step) ? "cursor-pointer hover:brightness-110" : "cursor-not-allowed opacity-60"
+                isActive && "glow-border ring-1 ring-neon-cyan/30",
+                canNavigateTo(step) ? "cursor-pointer hover:brightness-125 hover-glow" : "cursor-not-allowed opacity-50"
               )}
             >
               <Icon className={cn("w-4 h-4", config.color)} />
-              <span className={cn(isActive ? "text-foreground" : "text-muted-foreground")}>
+              <span className={cn(
+                "font-mono text-xs tracking-wide",
+                isActive ? "text-foreground text-glow" : "text-muted-foreground"
+              )}>
                 {STEP_LABELS[step]}
               </span>
             </button>

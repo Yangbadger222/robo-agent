@@ -6,6 +6,7 @@ class Settings(BaseSettings):
 
     openai_api_key: str = ""
     openai_model: str = "gpt-4o"
+    openai_base_url: str = ""
     embedding_model: str = "text-embedding-3-small"
 
     deepseek_api_key: str = ""

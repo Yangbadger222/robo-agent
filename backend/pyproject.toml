@@ -27,6 +27,9 @@ dev = [
     "httpx>=0.27",
 ]
 
+[tool.setuptools.packages.find]
+include = ["graph*", "rag*", "routers*", "prompts*"]
+
 [build-system]
 requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"

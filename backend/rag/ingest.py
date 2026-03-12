@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 import chromadb
@@ -16,10 +15,13 @@ def ingest_docs(docs_dir: str = "data/docs") -> int:
     if not docs_path.exists():
         raise FileNotFoundError(f"Directory not found: {docs_dir}")
 
-    embeddings = OpenAIEmbeddings(
+    embed_kwargs = dict(
         model=settings.embedding_model,
         openai_api_key=settings.openai_api_key,
     )
+    if settings.openai_base_url:
+        embed_kwargs["openai_api_base"] = settings.openai_base_url
+    embeddings = OpenAIEmbeddings(**embed_kwargs)
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 
     client = chromadb.PersistentClient(path=settings.chroma_persist_dir)

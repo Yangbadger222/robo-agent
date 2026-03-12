@@ -37,7 +37,7 @@ export default function StructurePage() {
         <button
           onClick={handleGenerate}
           disabled={!project || isStreaming}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 disabled:opacity-50 transition"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover-glow disabled:opacity-50 transition"
         >
           <Wand2 className="w-4 h-4" />
           Generate URDF with AI
@@ -54,16 +54,16 @@ export default function StructurePage() {
             />
 
             {structureSpec && (
-              <div className="rounded-lg border border-border p-4 text-sm space-y-2">
-                <h4 className="font-medium">Parsed Structure</h4>
+              <div className="rounded-lg glass-card p-4 text-sm space-y-2 corner-brackets">
+                <h4 className="font-mono text-xs tracking-wider uppercase text-neon-cyan/70">Parsed Structure</h4>
                 <p className="text-muted-foreground">
                   {structureSpec.links?.length || 0} links, {structureSpec.joints?.length || 0} joints
                 </p>
                 {structureSpec.joints?.map((j) => (
                   <div key={j.name} className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <span className="font-mono bg-muted px-1.5 py-0.5 rounded">{j.name}</span>
+                    <span className="font-mono bg-neon-cyan/5 border border-neon-cyan/20 px-1.5 py-0.5 rounded text-neon-cyan/80">{j.name}</span>
                     <span>({j.type})</span>
-                    <span>{j.parent} → {j.child}</span>
+                    <span className="text-neon-cyan/40">{j.parent} → {j.child}</span>
                   </div>
                 ))}
               </div>
@@ -71,7 +71,7 @@ export default function StructurePage() {
 
             <button
               onClick={handleComplete}
-              className="w-full bg-green-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-green-700 transition"
+              className="w-full bg-neon-green/90 text-black rounded-lg py-2.5 text-sm font-medium hover:bg-neon-green hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] transition"
             >
               Confirm Structure & Continue
             </button>
