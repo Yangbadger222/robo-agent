@@ -1,0 +1,27 @@
+URDF (Unified Robot Description Format) is an XML format for describing robot models.
+
+The root element of a URDF file is <robot name="robot_name">. It contains two primary
+child element types: <link> and <joint>.
+
+A <link> element represents a rigid body. Each link can contain:
+- <visual>: defines the shape and appearance for rendering (mesh or primitive geometry)
+- <collision>: defines the shape used for collision detection
+- <inertial>: specifies mass and inertia tensor for dynamics simulation
+
+Supported geometry primitives include <box size="x y z">, <cylinder radius="r" length="l">,
+<sphere radius="r">, and <mesh filename="path.stl">.
+
+A <joint> element connects two links with a parent-child relationship. Joint types:
+- fixed: no movement between links
+- revolute: rotation around a single axis with upper and lower limits
+- continuous: rotation around a single axis with no limits
+- prismatic: linear sliding along an axis with limits
+- floating: allows motion in all 6 degrees of freedom
+- planar: allows motion in a plane perpendicular to the axis
+
+Each joint requires <parent link="name"/> and <child link="name"/> elements.
+The <origin xyz="x y z" rpy="r p y"/> element sets the transform from parent to child.
+The <axis xyz="x y z"/> element defines the axis of rotation or translation.
+
+Revolute and prismatic joints should include <limit lower="" upper="" effort="" velocity=""/>
+to define the range of motion and force/speed constraints.

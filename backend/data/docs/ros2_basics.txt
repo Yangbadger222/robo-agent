@@ -1,0 +1,27 @@
+ROS 2 (Robot Operating System 2) is a flexible framework for writing robot software.
+
+Nodes are the fundamental building blocks of a ROS 2 system. Each node is responsible
+for a single, modular purpose (e.g., controlling wheel motors, publishing sensor data).
+Nodes communicate with each other using topics, services, and actions.
+
+Topics implement a publish/subscribe model. A node publishes messages on a topic, and
+any number of nodes can subscribe to that topic to receive those messages. Topics are
+best suited for continuous data streams like sensor readings or joint states.
+
+Services use a request/response pattern. A client node sends a request to a service
+server node and waits for a response. Services are suited for discrete operations
+like triggering a calibration or querying a robot's current mode.
+
+Actions are similar to services but designed for long-running tasks. They provide
+feedback during execution and can be canceled. Examples include navigating to a
+goal position or executing a multi-step manipulation sequence.
+
+The launch system in ROS 2 allows you to start multiple nodes simultaneously
+and configure their parameters. Launch files can be written in Python, XML, or YAML.
+
+Quality of Service (QoS) settings control the reliability and behavior of
+communication channels, including history depth, reliability, and durability.
+
+Common message types include sensor_msgs/JointState for joint positions and
+velocities, geometry_msgs/Twist for velocity commands, and std_msgs/String
+for simple text data.

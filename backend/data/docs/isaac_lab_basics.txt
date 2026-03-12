@@ -1,0 +1,32 @@
+NVIDIA Isaac Lab - Reinforcement Learning Environment Guide
+
+Isaac Lab is a unified framework for robot learning built on NVIDIA Isaac Sim.
+It provides tools for creating RL environments, training policies, and sim-to-real transfer.
+
+Key Concepts:
+- DirectRLEnv: Base class for environments with direct physics access.
+- ManagerBasedRLEnv: Higher-level environment with observation/action/reward managers.
+- @configclass: Decorator for dataclass-based configuration (replaces standard dataclass).
+
+Environment Structure:
+- _setup_scene(): Create simulation assets (robots, objects, terrain).
+- _pre_physics_step(): Apply actions before simulation step.
+- _get_observations(): Compute observation tensors.
+- _get_rewards(): Compute reward values.
+- _get_dones(): Check termination conditions.
+- _reset_idx(): Reset specific environment instances.
+
+Configuration:
+- EnvCfg uses @configclass with nested configs for scene, observations, actions, rewards.
+- sim.dt controls physics timestep (default 1/120s).
+- decimation controls policy frequency (e.g., decimation=4 means policy at 30Hz with 120Hz physics).
+
+Training Integration:
+- RSL-RL: Default on-policy RL library (PPO). Config via RslRlOnPolicyRunnerCfg.
+- rl_games: Alternative RL training library.
+- SKRL: Another option with multi-agent support.
+
+Articulation:
+- Robots are loaded from URDF or USD files.
+- Joint positions, velocities, and efforts are accessible as tensors.
+- Use ArticulationCfg to configure robot properties.

@@ -1,0 +1,30 @@
+Motor Selection Guide for Robotics
+
+Types of Motors:
+- DC Brushed Motors: Simple, cheap, good for basic applications. Low efficiency.
+- Brushless DC (BLDC): Higher efficiency, longer life, smoother operation. Used in drones and arms.
+- Stepper Motors: Precise position control without feedback. NEMA 17/23 common in robotics.
+- Servo Motors: Closed-loop with encoder. Best for robotic arms and precise positioning.
+- Linear Actuators: Convert rotary to linear motion. Used for grippers and prismatic joints.
+
+Key Specifications:
+- Torque (Nm): Force × distance. Must exceed joint load with safety factor (1.5-3x).
+- Speed (RPM): Rotational speed. Consider gear reduction for torque multiplication.
+- Voltage: Operating voltage must match power supply and driver.
+- Current: Peak and continuous current ratings for driver sizing.
+- Encoder Resolution: CPR (counts per revolution) for position feedback.
+
+Torque Calculation:
+For a revolute joint: τ = m × g × L × SF
+Where m = mass of links beyond joint, g = 9.81 m/s², L = distance to center of mass, SF = safety factor.
+
+Common Motor Families:
+- Dynamixel (ROBOTIS): Popular smart servos with built-in controller (MX, XM, XH series).
+- NEMA stepper motors: Standardized frame sizes (NEMA 17 = 42mm, NEMA 23 = 57mm).
+- Maxon motors: Premium brushless motors for precision robotics.
+- ODrive-compatible BLDC: Custom servo systems using ODrive motor controllers.
+
+Motor Driver Matching:
+- Stepper: Use TMC2209, A4988, or DRV8825 drivers.
+- BLDC: Use ODrive, VESC, or SimpleFOC-compatible drivers.
+- Servo: Often integrated; external drivers for larger servos.

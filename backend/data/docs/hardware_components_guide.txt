@@ -1,0 +1,36 @@
+Hardware Components Guide for Robot Builds
+
+Microcontrollers and Single Board Computers:
+- Arduino Mega 2560: 54 digital I/O, good for simple robots. $15-25.
+- Teensy 4.1: 600MHz Cortex-M7, excellent for real-time control. $30.
+- STM32 Nucleo boards: Industrial-grade, CAN bus support. $15-50.
+- Raspberry Pi 4/5: Linux-based, good for vision and high-level control. $35-80.
+- NVIDIA Jetson Nano/Orin: GPU-accelerated for AI/ML inference. $99-499.
+- OpenCR 1.0 (ROBOTIS): Designed for Dynamixel servos, ROS 2 compatible. $180.
+
+Motor Drivers:
+- L298N: Dual H-bridge, up to 2A per channel. Basic DC motor control. $3.
+- DRV8825: Stepper driver, 1/32 microstepping, 2.2A. $5.
+- TMC2209: Silent stepper driver, UART control, 2A. $8.
+- ODrive v3.6: Dual BLDC driver, FOC control, encoder input. $120.
+- VESC 6: Open-source BLDC driver, CAN bus, current sensing. $80.
+
+Sensors:
+- AS5600: Magnetic rotary encoder, 12-bit, I2C. $3.
+- MPU6050: 6-axis IMU (accelerometer + gyroscope), I2C. $2.
+- BNO055: 9-axis absolute orientation sensor, I2C. $25.
+- VL53L0X: Time-of-flight distance sensor, 2m range. $8.
+- Force Sensitive Resistor (FSR): Simple force measurement. $5.
+
+Communication:
+- UART/Serial: Simple point-to-point, up to 115200 baud.
+- I2C: Multi-device bus, short distance, up to 400kHz.
+- SPI: High-speed, full-duplex, good for IMUs and displays.
+- CAN Bus: Robust multi-device, used in automotive and industrial robots.
+- Ethernet: High bandwidth, used with ROS 2 for inter-device communication.
+- Bluetooth/WiFi: Wireless control and telemetry.
+
+Power:
+- LiPo batteries: High energy density, 3.7V per cell (2S=7.4V, 3S=11.1V, 4S=14.8V).
+- DC power supplies: Bench supplies for development (12V/24V, 5-30A).
+- Voltage regulators: Buck converters for 5V/3.3V logic from motor voltage.
